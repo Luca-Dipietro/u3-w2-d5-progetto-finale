@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, Container, Row, Col, Spinner } from "react-bootstrap";
+import { Card, Container, Row, Col, Spinner, Alert } from "react-bootstrap";
 import { WiHumidity, WiStrongWind, WiThermometer } from "react-icons/wi";
 import Forecast from "./ForecastApp";
 
@@ -10,6 +10,7 @@ const Weather = () => {
   const [date, setDate] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [cityName, setCityName] = useState("");
+  const [error, setError] = useState(null);
 
   const getDate = () => {
     let oggi = new Date();
@@ -30,12 +31,20 @@ const Weather = () => {
 
   const fetchWeather = () => {
     fetch(wetUrl)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Errore durante il recupero dei dati meteorologici.");
+        }
+        return response.json();
+      })
       .then((data) => {
         setWeather(data);
         setIsLoading(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setError(err.message);
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -57,6 +66,10 @@ const Weather = () => {
           <Spinner animation="border" role="status" className="mt-3">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
+        ) : error ? (
+          <Alert variant="danger" className="mt-3">
+            {error}
+          </Alert>
         ) : (
           <Container fluid className="h-100">
             <Row className="justify-content-center h-100">
