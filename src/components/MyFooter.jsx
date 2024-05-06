@@ -12,8 +12,8 @@ const MyFooter = function () {
             <p className="mb-0">© 2024 EpiWeather</p>
           </Col>
           <Col>
-            <Nav>
-              <ul className="list-unstyled d-flex justify-content-end mb-0">
+            <Nav className="justify-content-end">
+              <ul className="list-unstyled d-flex mb-0">
                 <li className="mx-2">
                   <Nav.Link className="footer-link" href="#">
                     Chi Siamo

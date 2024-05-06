@@ -39,7 +39,7 @@ const Home = () => {
           <Card.Title className="text-center mb-4">Benvenuto nell'app Meteo!</Card.Title>
           <Form onSubmit={handleFormSubmit}>
             <Form.Group className="mb-3">
-              <FormControl type="text" placeholder="Cerca Città" value={city} onChange={handleInputChange} />
+              <FormControl type="text" placeholder="Cerca Città" value={city} onChange={handleInputChange} required />
             </Form.Group>
             <Button variant="primary" type="submit" className="w-100 text-color">
               Cerca

@@ -57,6 +57,7 @@ const MyNavBar = (props) => {
                     value={city}
                     onChange={handleInputChange}
                     style={{ marginRight: "8px" }}
+                    required
                   />
                   <Button variant="dark" type="submit">
                     Cerca
